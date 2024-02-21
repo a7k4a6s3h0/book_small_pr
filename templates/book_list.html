@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block little %}
+    book list's
+{% endblock %}
+
+{%block content%}
+
+{% load static %}
+
+    <div class="row">
+        {% for data in obj_list %}
+            <div class="col-md-4 mt-3">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top img-fluid" src="{{data.book_img.url}}" alt="Card image cap">
+                    <div class="card-body p-3">
+                        <h5 class="card-title">{{data.book_name}}</h5>
+                        <p class="card-text">{{data.book_describtion}}</p>
+                        <h5>uploaded on {{data.created_at}}</h5>
+                        <h5>updated on {{data.updated_at}}</h5>
+                        <a href="{%url 'update_book' data.slug%}" class="btn btn-primary p-2">Update {{data.book_name}}</a>
+                        <a href="{%url 'del_book' data.slug%}" class="btn btn-danger">Delete {{data.book_name}}</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+
+{%endblock%}

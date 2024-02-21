@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block little %}
+    update books
+{% endblock %}
+
+{%block content%}
+<div class="row">
+<form action="{% url 'update_book' instance.slug %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="bookName">Book Name</label>
+            <input type="text" class="form-control" id="bookName" name="book_name" value="{{ instance.book_name }}">
+        </div>
+        <div class="form-group col-md-6 pt-3">
+            <label for="bookDescription">About the Book</label>
+            <textarea class="form-control" id="bookDescription" name="book_describtion" rows="4">{{ instance.book_describtion }}</textarea>
+        </div>
+    </div>
+    <div class="form-group pt-5">
+        <label for="bookImage">Current Image</label>
+        <img src="{{ instance.book_img.url }}" alt="Book Image" class="img-fluid">
+    </div>
+    <div class="form-group pt-5">
+        <label for="newBookImage">Add New Book Image (optional)</label>
+        <input type="file" class="form-control-file" id="newBookImage" name="book_img">
+    </div>
+    <button type="submit" class="btn btn-primary pt-2">Update Now</button>
+</form>
+</div>
+{%endblock%}
